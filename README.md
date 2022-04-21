@@ -54,6 +54,7 @@ Traceback (most recent call last):
     [...]
     raise exceptions.TimeoutError() from exc
 asyncio.exceptions.TimeoutError
+
 Bisecting: 51 revisions left to test after this (roughly 6 steps)
 [94d622680710fc1913de7aa390cfd23d61b803d7] Do not run schedule jobs on forks (#5821)
 running  'python' '../coiled-bisect/coiled-bisect.py'
@@ -61,6 +62,31 @@ Build senv florian-deadlock-94d622 with:
 * distributed: 94d62268 Do not run schedule jobs on forks (#5821)
 * dask: 47fa383c2 Fix upstream missing newline after `info()` call on empty DataFrame (#8727)
 
-Creating new software environment
+Found existing software environment build, returning
+Launching cluster florian-deadlock-94d622...
+Connecting to florian-deadlock-94d622...
+👀 Dashboard: http://54.241.222.164:8787
+Running workload on florian-deadlock-94d622...
+Iteration 0
+  Simple complete
+  Merge complete
+Iteration 1
+  Simple complete
+  Merge complete
+Iteration 2
+  Simple complete
+  Merge complete
+Iteration 3
+  Simple complete
+  Merge complete
+✅ 94d622 is good - no timeout
+Shutting down cluster florian-deadlock-94d622...
+
+Bisecting: 25 revisions left to test after this (roughly 5 steps)
+[fb8484ece6fd320a5c79d3ec0a07c72913905adb] Fix `distributed` pre-release's `distributed-impl` constraint (#5867)
+running  'python' '../coiled-bisect/coiled-bisect.py'
+Build senv florian-deadlock-fb8484 with:
+* distributed: fb8484ec Fix `distributed` pre-release's `distributed-impl` constraint (#5867)
+* dask: 217561b42 bump version to 2022.02.1
 [...]
 ```
