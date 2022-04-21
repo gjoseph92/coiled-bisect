@@ -1,13 +1,10 @@
+from __future__ import annotations
+
 import subprocess
 from pathlib import Path
 import os
 
-import coiled
-import coiled.v2
 import rich
-import distributed
-import dask
-import dask.datasets
 
 SENV_PREFIX = "florian-deadlock"
 DISTRIBUTED = Path("/Users/gabe/dev/distributed")
@@ -31,6 +28,8 @@ def run_in(path: Path, cmd: str, **kwargs) -> str:
 
 
 def make_software(name: str, dask_sha: str, distributed_sha: str):
+    import coiled
+
     reqs = run_in(BISECT, "poetry export --without-hashes").splitlines()
 
     coiled.create_software_environment(
@@ -47,6 +46,8 @@ def make_software(name: str, dask_sha: str, distributed_sha: str):
 
 
 def launch_cluster(senv: str, **kwargs):
+    import coiled.v2
+
     return coiled.v2.Cluster(
         name=senv,
         account="dask-engineering",
@@ -64,6 +65,8 @@ def launch_cluster(senv: str, **kwargs):
 
 
 def run_workload(client: distributed.Client):
+    import dask.datasets
+
     ddf = dask.datasets.timeseries(
         "2020",
         "2025",
@@ -100,15 +103,6 @@ def run_workload(client: distributed.Client):
 
 
 if __name__ == "__main__":
-    if "site-packages" in distributed.__file__:
-        raise RuntimeError(
-            f"Make sure `distributed` is installed in editable mode. Current installation path: {distributed.__file__}"
-        )
-    if "site-packages" in dask.__file__:
-        raise RuntimeError(
-            f"Make sure `dask` is installed in editable mode. Current installation path: {dask.__file__}"
-        )
-
     # Get current distributed commit
     distributed_sha = run_in(DISTRIBUTED, "git rev-parse HEAD")
     distributed_msg = run_in(DISTRIBUTED, f"git log --oneline -n 1 {distributed_sha}")
@@ -121,6 +115,19 @@ if __name__ == "__main__":
     )
     run_in(DASK, f"git checkout {dask_sha}")
     dask_msg = run_in(DASK, f"git log --oneline -n 1 {dask_sha}")
+
+    # NOTE: don't import until after the `git checkout` switching dask to a different commit!
+    import distributed
+    import dask
+
+    if "site-packages" in distributed.__file__:
+        raise RuntimeError(
+            f"Make sure `distributed` is installed in editable mode. Current installation path: {distributed.__file__}"
+        )
+    if "site-packages" in dask.__file__:
+        raise RuntimeError(
+            f"Make sure `dask` is installed in editable mode. Current installation path: {dask.__file__}"
+        )
 
     # Build senv for these commits
     senv = f"{SENV_PREFIX}-{distributed_sha[:6]}"
