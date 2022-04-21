@@ -34,4 +34,33 @@ Make sure you still have this poetry environment activated, then go to your dask
 (coiled-bisect-HV2P9iVq-py3.9) $ git checkout <good-tag-or-commit>
 (coiled-bisect-HV2P9iVq-py3.9) $ git bisect good
 (coiled-bisect-HV2P9iVq-py3.9) $ git bisect run python <../coiled-bisect/coiled-bisect.py>
+running  'python' '../coiled-bisect/coiled-bisect.py'
+Build senv florian-deadlock-0dab52 with:
+* distributed: 0dab5262 Revert #5883 (#5961)
+* dask: 02f388659 Reduce gpuci ``pytest`` parallelism (#8826)
+
+Creating new software environment
+[...]
+Successfully saved software environment build
+Launching cluster florian-deadlock-0dab52...
+Connecting to florian-deadlock-0dab52...
+👀 Dashboard: http://54.153.110.227:8787
+Running workload on florian-deadlock-0dab52...
+Iteration 0
+  Simple complete
+❌ 0dab52 is bad - timed out
+Shutting down cluster florian-deadlock-0dab52...
+Traceback (most recent call last):
+    [...]
+    raise exceptions.TimeoutError() from exc
+asyncio.exceptions.TimeoutError
+Bisecting: 51 revisions left to test after this (roughly 6 steps)
+[94d622680710fc1913de7aa390cfd23d61b803d7] Do not run schedule jobs on forks (#5821)
+running  'python' '../coiled-bisect/coiled-bisect.py'
+Build senv florian-deadlock-94d622 with:
+* distributed: 94d62268 Do not run schedule jobs on forks (#5821)
+* dask: 47fa383c2 Fix upstream missing newline after `info()` call on empty DataFrame (#8727)
+
+Creating new software environment
+[...]
 ```
