@@ -19,7 +19,7 @@ $ poetry shell
 (coiled-bisect-HV2P9iVq-py3.9) $ pip install --no-deps -e <path-to-distributed-fork>
 ```
 
-Edit the script in [`coiled-bisect.py`](blob/main/coiled-bisect.py) as necessary to actually trigger your error condition. You'll most want to modify `run_workload`, `launch_cluster`, and `make_software`, and the error-handling logic around the invoation of `run_workload`. The script needs to exit 0 when things work, and exit nonzero otherwise.
+Edit the script in [`coiled-bisect.py`](coiled-bisect.py) as necessary to actually trigger your error condition. You'll most want to modify `run_workload`, `launch_cluster`, and `make_software`, and the error-handling logic around the invoation of `run_workload`. The script needs to exit 0 when things work, and exit nonzero otherwise.
 
 You'll also need to edit the `DISTRIBUTED` and `DASK` global variables to the paths of the distributed and dask forks on your local machine. And set the `SENV_PREFIX` as appropriate.
 
@@ -27,7 +27,7 @@ You'll also need to edit the `DISTRIBUTED` and `DASK` global variables to the pa
 
 Make sure you still have this poetry environment activated, then go to your dask fork and start bisecting!
 
-```
+```shell
 (coiled-bisect-HV2P9iVq-py3.9) $ cd <../distributed>
 (coiled-bisect-HV2P9iVq-py3.9) $ git bisect start
 (coiled-bisect-HV2P9iVq-py3.9) $ git bisect bad
