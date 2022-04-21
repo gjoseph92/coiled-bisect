@@ -130,7 +130,7 @@ if __name__ == "__main__":
         )
 
     # Build senv for these commits
-    senv = f"{SENV_PREFIX}-{distributed_sha[:6]}"
+    senv = f"{SENV_PREFIX}-{distributed_sha[:8]}"
     rich.print(
         (
             f"[bold yellow]Build senv {senv} with:[/]\n"
@@ -152,11 +152,11 @@ if __name__ == "__main__":
             try:
                 run_workload(client)
             except distributed.TimeoutError:
-                rich.print(f"❌ [bold red]{distributed_sha[:6]} is bad - timed out[/]")
+                rich.print(f"❌ [bold red]{distributed_sha[:8]} is bad - timed out[/]")
                 raise
             else:
                 rich.print(
-                    f"✅ [bold green]{distributed_sha[:6]} is good - no timeout[/]"
+                    f"✅ [bold green]{distributed_sha[:8]} is good - no timeout[/]"
                 )
             finally:
                 rich.print(f"[bold yellow]Shutting down cluster {senv}...[/]")
