@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "coiled-bisect"
+version = "0.1.0"
+description = ""
+authors = ["Gabe Joseph <gabe@coiled.io>"]
+
+[tool.poetry.dependencies]
+dask = {extras = ["complete"], version = "^2022.4.1"}
+distributed = "^2022.4.1"
+python = "=3.9.1"
+# scheduler-profilers = {git = "https://github.com/gjoseph92/scheduler-profilers.git", rev = "main"}
+bokeh = "^2.4.2"
+lz4 = "^4.0.0"
+
+[tool.poetry.dev-dependencies]
+coiled = "^0.0.76"
+ipython = "^8.2.0"
+black = "^22.3.0"
+flake8 = "^4.0.1"
+rich = "^12.2.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
