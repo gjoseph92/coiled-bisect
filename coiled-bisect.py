@@ -111,16 +111,16 @@ if __name__ == "__main__":
 
     # Get current distributed commit
     distributed_sha = run_in(DISTRIBUTED, "git rev-parse HEAD")
-    distributed_msg = run_in(DISTRIBUTED, "git log --oneline -n 1 HEAD")
+    distributed_msg = run_in(DISTRIBUTED, f"git log --oneline -n 1 {distributed_sha}")
     distributed_timestamp = run_in(
         DISTRIBUTED, f"git show -s --format=%ci {distributed_sha!r}"
     )
     # Figure out what dask `main` was for this distributed commit, by comparing timestamps
     dask_sha = run_in(
-        DASK, f"git log -n 1 --format=format:%H --before {distributed_timestamp!r}"
+        DASK, f"git log -n 1 --format=format:%H --before={distributed_timestamp!r} main"
     )
-    dask_msg = run_in(DASK, "git log --oneline -n 1 HEAD")
     run_in(DASK, f"git checkout {dask_sha}")
+    dask_msg = run_in(DASK, f"git log --oneline -n 1 {dask_sha}")
 
     # Build senv for these commits
     senv = f"{SENV_PREFIX}-{distributed_sha[:6]}"
