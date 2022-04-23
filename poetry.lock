@@ -221,7 +221,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "coiled"
-version = "0.0.76.post0.dev4"
+version = "0.0.76.post0.dev8"
 description = ""
 category = "dev"
 optional = false
@@ -1109,8 +1109,8 @@ cloudpickle = [
     {file = "cloudpickle-2.0.0.tar.gz", hash = "sha256:5cd02f3b417a783ba84a4ec3e290ff7929009fe51f6405423cfccfadd43ba4a4"},
 ]
 coiled = [
-    {file = "coiled-0.0.76.post0.dev4-py3-none-any.whl", hash = "sha256:5475b9eb11a27186496f27d0afd8b80bda8902f3cea2afc99a733bc62b0876fc"},
-    {file = "coiled-0.0.76.post0.dev4.tar.gz", hash = "sha256:e6711c7657527516f043f46bf0fad1e2da7781d425f2dd4f48e7f14c72dffdfb"},
+    {file = "coiled-0.0.76.post0.dev8-py3-none-any.whl", hash = "sha256:75edf42e88c1bb982ecf645936a8426981eb7fd0e4439272b3c05af00138228c"},
+    {file = "coiled-0.0.76.post0.dev8.tar.gz", hash = "sha256:83357891f04f40e96a2bd3c36e39876c24a725286a1ca191b7b9aea732a6ca6e"},
 ]
 colorama = [
     {file = "colorama-0.4.4-py2.py3-none-any.whl", hash = "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"},
